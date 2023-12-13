@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <!-- sbb CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css">
+
+
+
+    <script defer src="/main.js"></script>
+
+
+    <title>여행관리</title>
+
+
+</head>
+<body>
+
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/employee/{department}/{employeeId}/home(department=${dept},employeeId=${employeeId})}" >Time Treasure</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()"  th:href="@{/employee/{department}/{id}/manage(department=${dept}, id=${employeeId}) }" th:text="${work}">work</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()"  th:href="@{/employee/{department}/{id}/all(department=${dept},id=${employeeId})}">직원현황</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="inner" style="position:relative">
+    <a style="position:absolute ; right:100px ;top:-50px" th:href="@{/employee/travel/{id}/manage/reserve(id=${employeeId})}" class="btn btn-success" padding="30px">예약현황</a>
+    <a style="position:absolute ; right:10px ;top:-50px" th:href="@{/employee/travel/{id}/manage/artifact/all(id=${employeeId})}"class="btn btn-danger" padding="30px">유물현황</a>
+<!--    <a style="position:absolute ; right:10px ;top:-50px" th:href="@{/employee/travel/{id}/manage/artifact/new (id=${employeeId})}"class="btn btn-danger" padding="30px">유물등록</a>-->
+
+    <table style="font-size:13px">
+        <thead>
+        <tr>
+            <td style="font-weight: bold; font-size:15px"> 등록된 타임 머신 </td>
+            <td>
+                과거로의 최대 이동 가능 시간
+            </td>
+            <td>
+                미래로의 최대 이동 가능 시간
+            </td>
+            <td>이름</td>
+            <td>상태</td>
+            <td>등급</td>
+
+            <td>예약</td>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr th:each="timeMachine:${timeMachineList}">
+            <td th:text="${timeMachine.id}"></td>
+            <td th:text="${timeMachine.pastTripLimit}"></td>
+            <td th:text="${timeMachine.futureTripLimit}"></td>
+            <td th:text="${timeMachine.name}"></td>
+            <td th:text="${timeMachine.status}"></td>
+            <td th:text="${timeMachine.grade}"></td>
+            <td>
+                <a th:href="@{/employee/travel/{employeeId}/manage/{timeMachineId}(employeeId=${employeeId},timeMachineId=${timeMachine.id})}" class="btn btn-primary" padding="30px">예약하기</a>
+
+            </td>
+
+        </tr>
+
+
+        </tbody>
+
+
+    </table>
+
+
+
+</div>
+
+</body>
+</html>

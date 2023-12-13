@@ -1,0 +1,4 @@
+엔티티들은 @Entity 로 선언되고 ,  @Id 를 통해  primary key 로 지정될 수 있고
+@ManyToOne 으로  다대일 카디널리티 를 지정할 수 있습니다.
+@Column(name="") 으로  컬럼명을 지정할 수 있습니다.
+@JoinColumn으로

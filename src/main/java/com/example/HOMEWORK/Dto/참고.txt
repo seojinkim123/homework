@@ -1,0 +1,2 @@
+DTO는 data transform object 로써  html form 과 컨트롤러(진입점) 사이의 데이터를 주고받는 객체입니다.
+DTO를 통해 좀더 유연한 컨트롤러를 만들 수 있습니다.

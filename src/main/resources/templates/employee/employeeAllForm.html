@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+  <!-- sbb CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/main.css">
+
+
+
+  <script defer src="/main.js"></script>
+
+
+  <title>직원현황</title>
+
+
+</head>
+<body>
+
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/employee/{department}/{employeeId}/home(department=${dept},employeeId=${employeeId})}" >Time Treasure</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+          <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAuthenticated()"  th:href="@{/employee/{department}/{employeeId}/manage(department=${dept} ,employeeId=${employeeId})}" th:text="${work}">work</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAuthenticated()"  th:href="@{/employee/{department}/{employeeId}/all(department=${dept},employeeId=${employeeId})}">직원현황</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+<div >
+
+  <table>
+    <thead>
+      <tr>
+        <td>아이디 </td>
+        <td>비밀번호</td>
+        <td>부서</td>
+        <td>이름</td>
+        <td>생일</td>
+        <td>사망일</td>
+        <td>상태</td>
+        <td>역할</td>
+        <td>관리</td>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr th:each="employee:${employeeList}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.password}"></td>
+        <td th:text="${employee.department.name}"></td>
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.birthDate}"></td>
+        <td th:text="${employee.deathDate}"></td>
+        <td th:text="${employee.role}"></td>
+        <td th:text="${employee.status}"></td>
+        <td>
+          <a th:href="@{/employee/{dept}/{var}/update(var=${employee.id},dept=${dept})}" class="btn btn-primary" padding="30px">수정</a>
+<!--          <a th:href="@{/employee/{dept}/{var}/delete(var=${employeeId},dept=${dept})}" class="btn btn-danger" padding="30px">삭제</a>-->
+          <a th:href="@{/employee/{dept}/{var}/delete(var=${employee.id},dept=${dept})}" class="btn btn-danger" padding="30px">삭제</a>
+        </td>
+
+      </tr>
+
+
+    </tbody>
+
+
+  </table>
+
+</div>
+
+</body>
+</html>

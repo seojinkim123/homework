@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+  <!-- sbb CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+  <title>회원가입</title>
+
+  <style>
+
+      body{
+          background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/c5081c54769825.5968bb6d6c14c.jpg'); /* 이미지 파일 경로로 변경하세요 */
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+      }
+      .floating-component {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border:solid 1px #b6effb;
+          color: #fff;
+          padding: 10px 20px;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          animation: floatAnimation 3s infinite ease-in-out;
+      }
+
+
+  </style>
+</head>
+<body>
+
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Time Treasure</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+          <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  th:href="@{/artifact}">유물보기</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="inner " style="display:flex; align-items:center ; justify-content: center ; height:700px; font-size:30px; ;" >
+    <a href="/customer/new"  style="width:200px ; height:200px ; line-height:200px; margin:20px; border:solid 1px;border-radius:2px;  display:block; color:black; text-decoration: none;text-align: center">
+      고객님
+    </a>
+    <a href="/employee/travel/new"  style="width:200px ; height:200px ; line-height:200px; margin:20px; border:solid 1px;border-radius:2px; color:white; display:block; text-decoration: none;text-align: center;">
+      시간여행부서
+    </a>
+    <a href="/employee/reserve/new" style="width:200px ; height:200px ; line-height:100px; margin:20px; border:solid 1px;border-radius:2px; color:white; display:block; text-decoration: none;text-align: center">
+      타임머신<br>예약관리부서
+    </a>
+<!--    <a href="/employee/sales/new"  style="width:200px ; height:200px ; line-height:200px; margin:20px; border:solid 1px;border-radius:2px; color:white; display:block; text-decoration: none;text-align: center">-->
+<!--      판매관리부서-->
+<!--    </a>-->
+    <a href="employee/appraisal/new"  style="width:200px ; height:200px ; line-height:200px; margin:20px; border:solid 1px;border-radius:2px; color:white; display:block; text-decoration: none;text-align: center">
+      감정부서
+    </a>
+</div>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <!-- sbb CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css">
+
+
+
+    <script defer src="/main.js"></script>
+
+
+    <title>유물</title>
+
+
+</head>
+<body>
+
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/employee/{department}/{employeeId}/home(department=${dept},employeeId=${employeeId})}" >Time Treasure</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()"  th:href="@{/employee/{department}/manage(department=${dept})}" th:text="${work}">work</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()"  th:href="@{/employee/{department}/all(department=${dept})}">직원현황</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="main">
+  <div class="inner">
+    <span>유물수집(여행중)</span>
+    <form method="post" th:object="${artifactFormDto}">
+<!--      <div class="main-sub">-->
+<!--        <span>아이디 </span>-->
+<!--        <input   type="text" th:field="*{id}" placeholder="이메일 형식으로 적어주세요">-->
+<!--        <p th:if="${#fields.hasErrors('id')}"-->
+<!--           th:errors="*{id}"-->
+<!--           style="color:red"-->
+<!--        >incorrectData-->
+
+<!--        </p>-->
+<!--      </div>-->
+      <div class="main-sub">
+        <span>유물이름</span>
+        <input   th:field="*{name}" >
+      <p th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}"
+         style="color:red">
+          incorrectData
+      </p>
+
+      </div>
+
+      <div class="main-sub">
+        <span>이 유물을 회사에서 처음 소유하게 된 시각 (현재 시각 기준)</span>
+        <input  type="date" th:field="*{createdDate}" placeholder="필수 입력값입니다.">
+          <p th:if="${#fields.hasErrors('createdDate')}"
+             th:errors="*{createdDate}"
+             style="color:red">
+              incorrectData
+          </p>
+
+      </div>
+      <div class="main-sub">
+        <span>이 유물이 발견된 시간대 (여행 시각 기준)</span>
+        <input  type="date" th:field="*{discoveryDate}" >
+          <p th:if="${#fields.hasErrors('discoveryDate')}"
+             th:errors="*{discoveryDate}"
+             style="color:red">
+              incorrectData
+          </p>
+      </div>
+
+      <div class="main-sub">
+        <span>이미지 url</span>
+        <input   th:field="*{imgUrl}" >
+          <p th:if="${#fields.hasErrors('imgUrl')}"
+             th:errors="*{imgUrl}"
+             style="color:red">
+              incorrectData
+          </p>
+      </div>
+
+<!--        <div class="main-sub">-->
+<!--            <span>가격</span>-->
+<!--            <input   th:field="*{price}" >-->
+<!--            <p th:if="${#fields.hasErrors('price')}"-->
+<!--               th:errors="*{price}"-->
+<!--               style="color:red">-->
+<!--                incorrectData-->
+<!--            </p>-->
+<!--        </div>-->
+
+
+
+
+        <button type="submit" value="Submit" >제출</button>
+
+
+
+
+    </form>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

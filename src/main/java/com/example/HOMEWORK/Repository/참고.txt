@@ -1,0 +1,1 @@
+Repository는 Spring Data Jpa 를 상속받아  DB와 연결되는    포인트가 됩니다.
